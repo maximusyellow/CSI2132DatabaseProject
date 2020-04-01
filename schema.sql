@@ -1,3 +1,5 @@
+set search_path = 'OnlineTravel';
+
 create table person (
 	firstName char(15) not null,
 	lastName char(20) not null,
