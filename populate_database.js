@@ -269,9 +269,9 @@ const { Client } = require('pg')
 
 const client = new Client({
 	user: 'postgres',
-	host: 'localhost',
+	host: '127.0.0.1',
 	database: 'postgres',
-	password: 'XXXXXXXXX',
+	password: 'Gvasn2v2bj',
 	port: 5432
 })
 client.connect().then(() => console.log('connected')).catch(err => console.error('connection error', err.stack))
