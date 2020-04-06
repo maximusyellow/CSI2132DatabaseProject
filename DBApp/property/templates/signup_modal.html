@@ -1,0 +1,90 @@
+<div class="modal fade" id="signupmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" method="POST" novalidate>
+                {% csrf_token %}
+      
+                <div class="form-group">
+                  <label for="firstname">First name</label>
+                  <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required>
+                  <div class="invalid-feedback">
+                    Invalid first name.
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="lastname">Last name</label>
+                  <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" required>
+                  <div class="invalid-feedback">
+                    Invalid last name.
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="street">Street name</label>
+                  <input type=text class="form-control" name="street" id="street" placeholder="Street name" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid street name.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="state_prov">State/Province</label>
+                  <input type=text class="form-control" name="state_prov" id="state_prov" placeholder="State/province"
+                    required>
+                  <div class="invalid-feedback">
+                    Please provide a valid state or province.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type=text class="form-control" name="city" id="city" placeholder="City" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid city.
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="ssn_sin">SSN/SIN</label>
+                  <input type="text" class="form-control" id="ssn_sin" name="ssn_sin" placeholder="SSN/SIN" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid state.
+                  </div>
+                </div>
+      
+                <div class="modal-footer">
+                  <button class="btn btn-primary" type="submit">Sign up</button>
+                </div>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+          // Example starter JavaScript for disabling form submissions if there are invalid fields
+          (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+            }, false);
+          })();
+        </script>

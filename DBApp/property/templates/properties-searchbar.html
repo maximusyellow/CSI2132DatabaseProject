@@ -1,0 +1,46 @@
+{% include 'navigation.html' %}
+{% load static %}
+
+<br>
+<br>
+<br>
+<body background="{% static "propertyApp/bkg.jpg" %}" background-repeat="no-repeat">
+<form>
+    <div class="row justify-content-center">
+        <div class="form-row">
+            <div class="col-md-3">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="City">
+            </div>
+
+            <div class="col-md-3">
+                <label for="indate">Start Date</label>
+                <input type="date" class="form-control" id="indate" name="indate" placeholder="dd-mm-yyyy">
+            </div>
+
+            <div class="col-md-3">
+                <label for="outdate">End Date</label>
+                <input type="date" class="form-control" id="outdate" name="outdate" placeholder="dd-mm-yyyy">
+            </div>
+
+            <div class="col-md-2">
+                <label for="capacity">Guests Allowed</label>
+                <select class="browser-default custom-select" name="capacity">
+                    <option value=1>Single</option>
+                    <option value="double">Double</option>
+                    <option value="triple">Triple</option>
+                    <option value=1>Quad</option>
+                    <option value="double">Suite</option>
+                    <option value="triple">Deluxe Suite</option>
+                </select>
+            </div>
+
+
+            <div class="col-md-1">
+                <button class="btn btn-primary" type="submit" name="search" id="search">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+{% include 'property.html' %}
