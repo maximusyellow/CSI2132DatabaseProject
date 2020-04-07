@@ -10,3 +10,4 @@
 4. Run the sql queries in the file schema.sql in the pgAdmin SQL editor
 5. On lines from 271 - 275 in populate_database.js, change the login information to fit your server
 6. In the terminal, do `node populate_database.js`. If everything works, then it should tell you that it has successfully created several tables.
+7. In the OnlineTravel.sh app, change PGPASSWORD to the password of your database

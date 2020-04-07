@@ -30,14 +30,9 @@ ACT_0()
   read -p "End Date (YYYY-MM-DD): " edate_input
   read -p "Number of Guests: " guests_input
   read -p "Country: " country_input
-  export PGPASSWORD='Gvasn2v2bj' #your postgres password
+  export PGPASSWORD='XXXXXXXX' #your postgres password
   psql -h 127.0.0.1 -d postgres -U postgres -c "\encoding UTF8;" -c "SELECT property.propertyid, property.name, property.maxguests, property.pernightfee, property.city FROM \"OnlineTravel\".property natural join \"OnlineTravel\".booking_info WHERE country LIKE '%$country_input%' and maxguests >= '$guests_input' and (enddate <= '$sdate_input' or startdate >= '$edate_input')"
   echo "Properties listed above are available during your selected dates"
-  #option=''
-  #read -p "Would you like to sort results? Price - [ASC/DESC] " option
-  #export PGPASSWORD='Gvasn2v2bj' #your postgres password
-  #psql -h 127.0.0.1 -d postgres -U postgres -c "SELECT property.propertyid, property.name, property.maxguests, property.pernightfee, property.city FROM \"OnlineTravel\".property natural join \"OnlineTravel\".booking_info WHERE country LIKE '%$country_input%' and maxguests >= '$guests_input' and (enddate <= '$sdate_input' or startdate >= '$edate_input') ORDER BY \"OnlineTravel\".property.pernightfee '$option'"
-  
 
 }
 
@@ -46,7 +41,7 @@ ACT_1()
 {
   userid=''
   read -p "Email Address (example@example.com): " host_email_input
-  export PGPASSWORD='Gvasn2v2bj' #your postgres password
+  export PGPASSWORD='XXXXXXXX' #your postgres password
   userid=`psql -X -h 127.0.0.1 -d postgres -U postgres -t -c "SELECT sys_user.userid FROM \"OnlineTravel\".sys_user WHERE email LIKE '%$host_email_input%'"`
   userid=$(echo ${userid:1})
   echo "Found userid: $userid"
@@ -71,10 +66,10 @@ ACT_1()
       read -p "WIFI? (true/false) " wifi
       read -p "Heating? (true/false) " heating
       read -p "Description " description
-      export PGPASSWORD='Gvasn2v2bj' #your postgres password
+      export PGPASSWORD='XXXXXXXX' #your postgres password
       country=`psql -X -h 127.0.0.1 -d postgres -U postgres -t -c "SELECT branch.country FROM \"OnlineTravel\".branch WHERE country LIKE '%$country%'"`
       country=$(echo ${country:1})
-      export PGPASSWORD='Gvasn2v2bj' #your postgres password
+      export PGPASSWORD='XXXXXXXX' #your postgres password
       psql -h 127.0.0.1 -d postgres -U postgres -c "INSERT INTO \"OnlineTravel\".property(propertyid, userid, pernightfee, name, maxguests, numbathrooms, housenumber, street, postalcode, city, province, country, entirehome, sparkclean, wifi, heating, description) 
       VALUES ( '$propertyid', '$userid', '$per_night_fee', '$name', $max_guests, $num_bathrooms, $house_number, '$street', '$postal_code', '$city', '$province', '$country', $entire_home, $spark_clean, $wifi, $heating, '$description');"
     fi
@@ -92,7 +87,7 @@ ACT_3()
   option=''
   current_date=$(date +%F)
   read -p "Specify Branch Country: " country_input
-  export PGPASSWORD='Gvasn2v2bj' #your postgres password
+  export PGPASSWORD='XXXXXXXX' #your postgres password
   psql -h 127.0.0.1 -d postgres -U postgres -c "\encoding UTF8;" -c "SELECT property.propertyid, booking_info.bookingid, booking_info.bookerid, property.name, property.maxguests, property.pernightfee, property.city, startdate, enddate FROM \"OnlineTravel\".property natural join \"OnlineTravel\".booking_info WHERE country LIKE '%$country_input%' and (startdate > '$current_date' ) ORDER BY startdate ASC;"
   read -p 'If you would like to see more information on property (including past and future bookings), please enter the propertyid [N to cancel] ' option
   echo $option
@@ -102,21 +97,13 @@ ACT_3()
 
 }
 
-function boolean() {
-  case $1 in
-    TRUE) echo true ;;
-    FALSE) echo false ;;
-    *) echo "Err: Unknown boolean value \"$1\"" 1>&2; exit 1 ;;
-   esac
-}
-
 #List upcoming available properties for your branch
 ACT_4()
 {
   option=''
   current_date=$(date +%F)
   read -p "Specify Branch Country: " country_input
-  export PGPASSWORD='Gvasn2v2bj' #your postgres password
+  export PGPASSWORD='XXXXXXXX' #your postgres password
   psql -h 127.0.0.1 -d postgres -U postgres -c "SELECT property.propertyid, booking_info.bookingid, booking_info.bookerid, property.name, property.maxguests, property.pernightfee, property.city, startdate, enddate FROM \"OnlineTravel\".property natural join \"OnlineTravel\".booking_info WHERE country LIKE '%$country_input%' and (enddate < '$current_date' or startdate > '$current_date') ORDER BY enddate ASC;"
   read -p 'If you would like to see more information on property (including past and future bookings), please enter the propertyid [N to cancel] ' option
   echo $option
@@ -129,7 +116,7 @@ ACT_2()
 {
   employeeid=''
   read -p "Employee Email Address (example@example.com): " employee_email_input
-  export PGPASSWORD='Gvasn2v2bj' #your postgres password
+  export PGPASSWORD='XXXXXXXX' #your postgres password
   employeeid=`psql -X -h 127.0.0.1 -d postgres -U postgres -t -c "\encoding UTF8;" -c "SELECT employee.employeeid FROM \"OnlineTravel\".employee WHERE email LIKE '%$employee_email_input%'"`
   output='f'
   option=''
