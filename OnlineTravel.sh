@@ -48,6 +48,7 @@ ACT_1()
   read -p "Email Address (example@example.com): " host_email_input
   export PGPASSWORD='XXXXXXXX' #your postgres password
   userid=`psql -X -h 127.0.0.1 -d postgres -U postgres -t -c "SELECT sys_user.userid FROM \"OnlineTravel\".sys_user WHERE email LIKE '%$host_email_input%'"`
+  userid=$(echo ${userid:1})
   echo "Found userid: $userid"
   option=''
   if [[ $userid != '' ]]; then
@@ -65,13 +66,14 @@ ACT_1()
       read -p "City " city
       read -p "Province " province
       read -p "Country " country
-      read -p "Entire Home? (t/f) " entire_home
-      read -p "Spark Clean? (t/f) " spark_clean
-      read -p "heating? (t/f) " heating
+      read -p "Entire Home? (true/false) " entire_home
+      read -p "Spark Clean? (true/false) " spark_clean
+      read -p "WIFI? (true/false) " wifi
+      read -p "Heating? (true/false) " heating
       read -p "Description " description
       export PGPASSWORD='XXXXXXXX' #your postgres password
       psql -h 127.0.0.1 -d postgres -U postgres -c "INSERT INTO \"OnlineTravel\".property(propertyid, userid, pernightfee, name, maxguests, numbathrooms, housenumber, street, postalcode, city, province, country, entirehome, sparkclean, wifi, heating, description) 
-      VALUES ( '$propertyid', '$userid', '$per_night_fee', '$name', $max_guests, $num_bathrooms, $house_number, '$street', '$postal_code', '$city', '$province', '$country', '$entire_home', '$spark_clean', '$wifi', '$heating', '$description');"
+      VALUES ( '$propertyid', '$userid', '$per_night_fee', '$name', $max_guests, $num_bathrooms, $house_number, '$street', '$postal_code', '$city', '$province', '$country', $entire_home, $spark_clean, $wifi, $heating, '$description');"
     fi
   else
     echo "The email specified does not exist in the system, please try again"
@@ -95,6 +97,14 @@ ACT_3()
     psql -h 127.0.0.1 -d postgres -U postgres -c "\encoding UTF8;" -c "SELECT property.*, startdate, enddate FROM \"OnlineTravel\".property natural join \"OnlineTravel\".booking_info WHERE propertyid LIKE '%$option%';"
   fi
 
+}
+
+function boolean() {
+  case $1 in
+    TRUE) echo true ;;
+    FALSE) echo false ;;
+    *) echo "Err: Unknown boolean value \"$1\"" 1>&2; exit 1 ;;
+   esac
 }
 
 #List upcoming available properties for your branch
